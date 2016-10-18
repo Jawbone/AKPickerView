@@ -134,6 +134,12 @@
 	self.collectionView.layer.sublayerTransform = transform;
 }
 
+- (void)setFastScrolling:(BOOL)fastScrolling
+{
+	_fastScrolling = fastScrolling;
+	self.collectionView.decelerationRate = (_fastScrolling) ? UIScrollViewDecelerationRateNormal : UIScrollViewDecelerationRateFast;
+}
+
 - (void)setMaskDisabled:(BOOL)maskDisabled
 {
 	_maskDisabled = maskDisabled;
@@ -445,7 +451,7 @@
 
 	CATransition *transition = [CATransition animation];
 	[transition setType:kCATransitionFade];
-	[transition setDuration:0.15];
+	[transition setDuration:0.05];
 	[self.label.layer addAnimation:transition forKey:nil];
 
 	self.label.font = self.selected ? self.highlightedFont : self.font;
